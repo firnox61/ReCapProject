@@ -11,11 +11,11 @@ namespace Business.Abstract
 {
     public interface ICarService
     {
-        List<Car> GetAll();
-        List<Car> GetAllByBrand(int id);
-        List<Car> GetByDailyPrice(decimal min,  decimal max);
-        List<CarDetailDto> GetCarDetailDtos();
-        Car GetById(int CarId);
+        IDataResult<List<Car>> GetAll();
+        IDataResult<List<Car>> GetAllByBrand(int id);
+        IDataResult<List<Car>> GetByDailyPrice(decimal min,  decimal max);
+        IDataResult<List<CarDetailDto>> GetCarDetailDtos();
+        IDataResult<Car> GetById(int CarId);
         IResult Add(Car car);
         
     }

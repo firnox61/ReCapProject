@@ -13,15 +13,8 @@ public class Program
         
 
         //Sil();
-       // CarTest();
+        CarTest();
     }
-
-    private static void Sil()
-    {
-        CarManager carManager3 = new CarManager(new EfCarDal());
-        carManager3.Delete(2);
-    }
-
     private static void Ekle()
     {
         CarManager carManager2 = new CarManager(new EfCarDal());
@@ -32,10 +25,17 @@ public class Program
     private static void CarTest()
     {
         CarManager carManager = new CarManager(new EfCarDal());
-
-        foreach (var car in carManager.GetCarDetailDtos())
+        var result=carManager.GetCarDetailDtos();
+        if(result.Success==true)
         {
-            Console.WriteLine("Araba:"+ car.CarName+"Marka:"+car.BrandName+ "Renk:"+ car.ColorName + "Fiyat:" + car.DailyPrice);
+
+            foreach (var car in result.Data)
+            {
+                Console.WriteLine("Araba:" + car.CarName + "Marka:" + car.BrandName + "Renk:" + car.ColorName + "Fiyat:" + car.DailyPrice);
+            }
+            Console.WriteLine(result.Message);
         }
+
+
     }//CarName, BrandName, ColorName, DailyPrice
 }
