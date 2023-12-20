@@ -13,5 +13,8 @@ namespace Business.Constants
         public static string CarListed="Araçlar Listelendi";
         public static string CarFindBrand="Araç markası bulundu";
         public static string CarFind = "Araç bulundu";
+        public static string BuyAccepted="Satış kabul edilid";
+
+        public static string BuyReject = "Arabanın kiralanabilmesi için arabanın teslim edilmesi gerekmektedir.";
     }
 }
