@@ -2,16 +2,18 @@
 using Business.Constants;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class RentalManager : IRentalServcie
+    public class RentalManager : IRentalService
 
     {
         IRentalDal _rentalDal;
@@ -19,29 +21,43 @@ namespace Business.Concrete
         {
             _rentalDal = rentalDal;
         }
+
         public IResult Add(Rental rental)
         {
-            if (rental.ReturnDate == null)
+            if (DateTime.Now.Hour == 20)
             {
-                return new ErrorResult(Messages.BuyReject);
+                return new ErrorResult(Messages.CarNameInvalid);
             }
             _rentalDal.Add(rental);
-            return new SuccessResult(Messages.BuyAccepted);
+            return new SuccessResult(Messages.CarAdded);
         }
 
-        public IResult Delete(Rental rental)
+        public IResult Delete(int RentalId)
         {
-            throw new NotImplementedException();
+            var result = _rentalDal.Get(r => r.Id == RentalId);
+            if (result == null)
+            {
+                return new ErrorResult();
+            }
+            _rentalDal.Delete(result);
+            return new SuccessResult();
         }
 
         public IDataResult<List<Rental>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.CarListed);
+        }
+
+        public IDataResult<Rental> GetById(int RentalId)
+        {
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == RentalId), Messages.CarAdded);
         }
 
         public IResult Update(Rental rental)
         {
-            throw new NotImplementedException();
+     
+            _rentalDal.Update(rental);
+            return new SuccessResult();
         }
     }
 }

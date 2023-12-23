@@ -31,6 +31,25 @@ namespace Business.Concrete
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
+        public IResult Update(Car car)
+        {
+            if (car.CarName == null)
+            {
+                return new ErrorResult();
+            }
+            _carDal.Update(car);
+            return new SuccessResult();
+        }
+        public IResult Delete(string CarName)
+        {
+            var result = _carDal.Get(c => c.CarName == CarName);
+            if (result == null)
+            {
+                return new ErrorResult();
+            }
+            _carDal.Delete(result);
+            return new SuccessResult();
+        }
 
         public IDataResult<List<Car>> GetAll()
         {

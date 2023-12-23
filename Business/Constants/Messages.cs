@@ -16,5 +16,7 @@ namespace Business.Constants
         public static string BuyAccepted="Satış kabul edilid";
 
         public static string BuyReject = "Arabanın kiralanabilmesi için arabanın teslim edilmesi gerekmektedir.";
+        public static string CarDelete="Araba silinmiştir";
+        public static string HataSonuc="Hatalı işlem";
     }
 }

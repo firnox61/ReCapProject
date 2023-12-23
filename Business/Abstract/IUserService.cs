@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IUserServcie
+    public interface IUserService
     {
         IDataResult<List<User>> GetAll();
-     
+        IDataResult<User> GetById(int UserId);
         IResult Add(User user);
         IResult Update(User user);
-        IResult Delete(User user);
+        IResult Delete(string UserName);
     }
 }

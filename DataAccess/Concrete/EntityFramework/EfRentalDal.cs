@@ -17,11 +17,11 @@ namespace DataAccess.Concrete.EntityFramework
             using (DataContext context = new DataContext())
             {
                 var result = from r in context.Rentals
-                             join g in context.Customers
-                             on r.CustomerId equals g.UserId
+                             join s in context.Customers
+                             on r.CustomerId equals s.UserId
                              join c in context.Car
                              on r.CarId equals c.CarId
-                             select new RentalDetailDto { Id = r.Id, CarId = c.CarId, CustomerId = g.UserId
+                             select new RentalDetailDto { Id = r.Id, CarId = c.CarId, CustomerId = s.UserId
                              , RentDate = r.RentDate, ReturnDate = r.ReturnDate };
                 return result.ToList();
             }
