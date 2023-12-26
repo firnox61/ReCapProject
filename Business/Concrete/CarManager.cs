@@ -1,11 +1,15 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingCorcerns.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,13 +25,13 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-
+        //busines kodu ayrı validasyon(doğrulama) ayrı yazılır
         public IResult Add(Car car)
         {
-            if(DateTime.Now.Hour==20)
-            {
-                return new ErrorResult(Messages.CarNameInvalid);
-            }
+
+
+            ValidationTool.Validate(new CarValidator(), car);
+
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
