@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingCorcerns.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
@@ -26,11 +27,12 @@ namespace Business.Concrete
             _carDal = carDal;
         }
         //busines kodu ayrı validasyon(doğrulama) ayrı yazılır
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
 
-
-            ValidationTool.Validate(new CarValidator(), car);
+            
+            //ValidationTool.Validate(new CarValidator(), car);
 
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
