@@ -12,7 +12,8 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-EQ4AUPM\SQLEXPRESS;Database=Recapproject;Trusted_Connection=true;Integrated Security=SSPI;");
+             optionsBuilder.UseSqlServer(@"Server=DESKTOP-EQ4AUPM\SQLEXPRESS;Database=Recapproject;Trusted_Connection=true;Integrated Security=SSPI;");
+           // optionsBuilder.UseSqlServer(@"Server=DESKTOP-EQ4AUPM\SQLEXPRESS;Database=Recapnewdatabase;Trusted_Connection=true;Integrated Security=SSPI;");
         }
         public DbSet<Car> Car { get; set; }
         public DbSet<Brand> Brand { get; set; }
@@ -20,6 +21,7 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<User> User { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Rental> Rentals { get; set; }
+        public DbSet<CarImage> CarImages { get; set; }
 
     }
 }

@@ -23,9 +23,9 @@ namespace DataAccess.Concrete.EntityFramework
                              join b in context.Brand
                              on c.BrandId equals b.BrandId
                              join g in context.Color
-                             on c.ColorId equals g.ColorId
+                             on c.ColorId equals g.ColorId                         
                              select new CarDetailDto
-                             { CarId = c.CarId, CarName = c.CarName, BrandName = b.BrandName, ColorName = g.ColorName, DailyPrice=c.DailyPrice };
+                             { CarId = c.CarId, CarName = c.CarName, BrandName = b.BrandName, ColorName = g.ColorName, DailyPrice=c.DailyPrice};
                 return result.ToList();
 
                 //CarName, BrandName, ColorName, DailyPrice
@@ -34,3 +34,6 @@ namespace DataAccess.Concrete.EntityFramework
         }
     }
 }
+/*join i in context.CarImages
+                             on c.ImageId equals i.Id
+    ImagePath=i.ImagePath*/

@@ -27,7 +27,7 @@ namespace Business.Concrete
             _carDal = carDal;
         }
         //busines kodu ayrı validasyon(doğrulama) ayrı yazılır
-        [ValidationAspect(typeof(CarValidator))]
+       // [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
 
