@@ -17,7 +17,7 @@ public class Program
 
     }
 
-    private static void RentalAdd()
+   /* private static void RentalAdd()
     {
         RentalManager rentalManager = new RentalManager(new EfRentalDal());
         
@@ -78,5 +78,5 @@ public class Program
         }
 
 
-    }//CarName, BrandName, ColorName, DailyPrice
+    }//CarName, BrandName, ColorName, DailyPrice*/
 }

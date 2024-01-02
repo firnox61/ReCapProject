@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Aspect;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -27,7 +28,8 @@ namespace Business.Concrete
             _carDal = carDal;
         }
         //busines kodu ayrı validasyon(doğrulama) ayrı yazılır
-       // [ValidationAspect(typeof(CarValidator))]
+        //[SecuredOperation("car.add,admin")]
+        //[ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
 
