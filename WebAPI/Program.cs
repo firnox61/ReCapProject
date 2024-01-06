@@ -4,12 +4,16 @@ using Autofac.Extensions.DependencyInjection;
 using Business.Abstract;
 using Business.Concrete;
 using Business.DependencyResolvers.Autofac;
+using Core.DependencyResolvers;
+using Core.Utilities.IoC;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Core.Extensions;
+using Core.DependencyResolvers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +38,12 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddSingleton<IRentalDal, EfRentalDal>();
 //Autofaci kullandýðýmýzý belirtiyoruz
 
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
+builder.Host.ConfigureContainer<ContainerBuilder>(options =>
+{
+    options.RegisterModule(new AutofacBusinessModule());
+});
 
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -57,15 +66,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 
 
-
-
-
-builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
-
-builder.Host.ConfigureContainer<ContainerBuilder>(options =>
+builder.Services.AddDependencyResolvers(new ICoreModule[]
 {
-    options.RegisterModule(new AutofacBusinessModule());
+            new CoreModule()
 });
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

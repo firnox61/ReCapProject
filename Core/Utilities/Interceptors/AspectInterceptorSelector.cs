@@ -18,7 +18,7 @@ namespace Core.Utilities.Interceptors
                 .GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
             classAttributes.AddRange(methodAttributes);
          //   classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger))); sisteme loglama ekleseydik kullanacağımız şey  ototmatik olarak tüm metotları loga dahil et demek
-
+         //buraya yine bu şekilde performance işini ekleyebilirdik ve bu tüm sistemi performanc eder
             return classAttributes.OrderBy(x => x.Priority).ToArray();//önceliklerine bak
         }
     }

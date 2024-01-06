@@ -2,6 +2,7 @@
 using Business.BusinessAspect.Aspect;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingCorcerns.Validation;
 using Core.Utilities.Result;
@@ -28,8 +29,9 @@ namespace Business.Concrete
             _carDal = carDal;
         }
         //busines kodu ayrı validasyon(doğrulama) ayrı yazılır
-        //[SecuredOperation("car.add,admin")]
-        //[ValidationAspect(typeof(CarValidator))]
+        [SecuredOperation("car.add,admin")]//düzgün çalışıyo
+        [ValidationAspect(typeof(CarValidator))]//düzgün çalışıyo
+        [CacheRemoveAspect("ICarService.Get")]//oradaki tüm getleri siler
         public IResult Add(Car car)
         {
 
@@ -39,6 +41,7 @@ namespace Business.Concrete
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
         }
+        [CacheRemoveAspect("ICarService.Get")]//oradaki tüm getleri siler
         public IResult Update(Car car)
         {
             if (car.CarName == null)
@@ -58,7 +61,7 @@ namespace Business.Concrete
             _carDal.Delete(result);
             return new SuccessResult();
         }
-
+        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarListed);
