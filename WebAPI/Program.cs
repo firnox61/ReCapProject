@@ -44,7 +44,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(options =>
 {
     options.RegisterModule(new AutofacBusinessModule());
 });
-
+builder.Services.AddCors();
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -74,7 +74,7 @@ builder.Services.AddDependencyResolvers(new ICoreModule[]
 
 
 var app = builder.Build();
-
+app.UseStaticFiles();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -82,7 +82,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 
 }
-
+app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

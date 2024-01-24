@@ -23,6 +23,6 @@ namespace Business.Constants
         public static string PasswordError = "pasaword hatalı";
         public static string AccessTokenCreated = "Token oluşturuldu";
         public static string AuthorizationDenied = "Yetkiniz Yok";
-        public const string FileNotFound = "Dosya bulunamadı";
+        
     }
 }

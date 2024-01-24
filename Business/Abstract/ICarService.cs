@@ -12,7 +12,12 @@ namespace Business.Abstract
     public interface ICarService
     {
         IDataResult<List<Car>> GetAll();
-        IDataResult<List<Car>> GetAllByBrand(int id);
+        IDataResult<List<Car>> GetAllByBrandId(int id);
+        IDataResult<List<Car>> GetAllByColorId(int id);
+
+        IDataResult<CarDetailDto> GetCarDetailId(int id);
+
+
         IDataResult<List<Car>> GetByDailyPrice(decimal min,  decimal max);
         IDataResult<List<CarDetailDto>> GetCarDetailDtos();
         IDataResult<Car> GetById(int CarId);
@@ -20,6 +25,8 @@ namespace Business.Abstract
         IResult Update(Car car);
         IResult Delete(string CarName);
         IResult AddTransactionalTest(Car car);
+      //  IDataResult<CarDetailDto> GetByDetailId(int id);
+      //  IDataResult<List<CarDetailDto>> GetCarByBrandAndColor(int brandId, int colorId);
 
     }
 }

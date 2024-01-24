@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Helper.GuidHelper
 {
-    public class GuidHelper
+    public class GuidHelper_
     {
         public static string Create()
         {

@@ -8,7 +8,7 @@ namespace Core.Utilities.Helper.FileHelper.Constants
 {
     public static class FileType
     {
-        public const string images = "Resimler";
-        public const string root = "Model/";
+        public const string images = "Images";
+        public const string root = "wwwroot/";
     }
 }

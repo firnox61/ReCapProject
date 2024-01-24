@@ -20,4 +20,12 @@
     <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\Resimler\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Images\default.jpeg" />
+  </ItemGroup>
+
 </Project>

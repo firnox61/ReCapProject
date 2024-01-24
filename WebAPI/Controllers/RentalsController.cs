@@ -19,6 +19,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
+            Thread.Sleep(5000);
             //IProductService productService = new ProductManager(new EfProductDal());
             var result = _rentalService.GetAll();
             if (result.Success)
@@ -68,5 +69,17 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getrentaldetails")]
+        public IActionResult GetRentalDetail()
+        {
+            var result = _rentalService.GetRentalDetailDtos();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
     }
 }

@@ -17,8 +17,8 @@ namespace Business.Concrete
 {
     public class CarImageManager : ICarImageService
     {
-        ICarImageDal _carImageDal;
-        IFileHelper _fileHelper;
+        private readonly ICarImageDal _carImageDal;
+        private readonly IFileHelper _fileHelper;
 
         public CarImageManager(ICarImageDal carImageDal,IFileHelper fileHelper)
         {
@@ -38,7 +38,7 @@ namespace Business.Concrete
 
             string guid = _fileHelper.Add(file);
             carImage.ImagePath = guid;
-            carImage.Date = DateTime.Now;
+            carImage.Date = DateTime.UtcNow;
             _carImageDal.Add(carImage);
             return new SuccessDataResult<CarImage>(carImage);
 
@@ -64,7 +64,7 @@ namespace Business.Concrete
         public IResult Update(IFormFile file, CarImage carImage)
         {
             _fileHelper.Update(file, carImage.ImagePath!);
-            carImage.Date = DateTime.Now;
+            carImage.Date = DateTime.UtcNow;
             _carImageDal.Update(carImage);
             return new SuccessDataResult<CarImage>(carImage);
         }
@@ -73,7 +73,7 @@ namespace Business.Concrete
             var carImages = _carImageDal.GetAll(c => c.CarId == carId);
             if (carImages.Count == 0)
             {
-                carImages.Add(new CarImage() { CarId = carId, ImagePath = "default.jpeg" });
+                carImages.Add(new CarImage() { CarId = carId, ImagePath = "defaultCar.jpg" });
                 return new SuccessDataResult<List<CarImage>>(carImages);
             }
             return new SuccessDataResult<List<CarImage>>(carImages);
