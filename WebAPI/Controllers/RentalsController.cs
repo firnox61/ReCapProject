@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            Thread.Sleep(5000);
+          
             //IProductService productService = new ProductManager(new EfProductDal());
             var result = _rentalService.GetAll();
             if (result.Success)
@@ -80,6 +80,15 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-
+        [HttpGet("rentaldatecontrol")]
+        public IActionResult RentalDateControl(int carId, DateTime start, DateTime end)
+        {
+            var result=_rentalService.RentalDateControl(carId, start, end);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

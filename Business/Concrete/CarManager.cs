@@ -15,6 +15,7 @@ using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,15 +78,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id), Messages.CarFindBrand);
         }
-        public IDataResult<CarDetailDto> GetCarDetailId(int id)
-        {
-
-            if (DateTime.Now.Hour == 5)
-            {
-                return new ErrorDataResult<CarDetailDto>(Messages.CarNameInvalid);
-            }
-            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetailId(id), Messages.CarListed);
-        }
+      
         public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c=>c.DailyPrice>=min && c.DailyPrice<=max));
@@ -106,8 +99,20 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarListed);
         }
+        public IDataResult<CarDetailDto> GetCarDetailId(int id)
+        {
 
-       
+            if (DateTime.Now.Hour == 5)
+            {
+                return new ErrorDataResult<CarDetailDto>(Messages.CarNameInvalid);
+            }
+            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetailId(id), Messages.CarListed);
+        }
+        public IDataResult<List<CarDetailDto>> GetCarByBrandAndColor(string brandName, string colorName)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarByBrandAndColor(brandName, colorName), Messages.CarListed);
+        }
+
         [TransactionScopeAspect]
         public IResult AddTransactionalTest(Car car)
         {
@@ -119,6 +124,8 @@ namespace Business.Concrete
             Add(car);
             return null;
         }
+
+      
 
         //public IDataResult<CarDetailDto> GetByDetailId(int id)
         //{

@@ -23,6 +23,7 @@ namespace Business.Constants
         public static string PasswordError = "pasaword hatalı";
         public static string AccessTokenCreated = "Token oluşturuldu";
         public static string AuthorizationDenied = "Yetkiniz Yok";
-        
+        public static string TarihHata = "Bu tarihlerde Araç Dolu";
+        public static string TarihUygun="Bu tarih aralğı uygun";
     }
 }

@@ -44,15 +44,40 @@ namespace DataAccess.Concrete.EntityFramework
                              on c.BrandId equals b.BrandId
                              join g in context.Color
                              on c.ColorId equals g.ColorId
-                             where c.CarId==id
+                              join i in context.CarImages
+                             on c.CarId equals i.CarId into images
+                              from img in images.DefaultIfEmpty()
+                              where c.CarId==id
                              select new CarDetailDto
-                             { CarId = c.CarId, CarName = c.CarName, BrandName = b.BrandName, ColorName = g.ColorName,ModelYear=c.ModelYear, DailyPrice=c.DailyPrice}).FirstOrDefault();
+                             { CarId = c.CarId, CarName = c.CarName, BrandName = b.BrandName, ColorName = g.ColorName,ModelYear=c.ModelYear, DailyPrice=c.DailyPrice,ImagePath = (img != null) ? img.ImagePath : null }).FirstOrDefault();
                 return result;
 
                 //CarName, BrandName, ColorName, DailyPrice
 
             }
         }
+
+        public List<CarDetailDto> GetCarByBrandAndColor(string brandName, string colorName)
+        {
+            using (DataContext context = new DataContext())
+            {
+                var result = from c in context.Car
+                              join b in context.Brand
+                              on c.BrandId equals b.BrandId
+                              join g in context.Color
+                              on c.ColorId equals g.ColorId
+                              where b.BrandName == brandName && g.ColorName == colorName
+                             select new CarDetailDto
+                              { CarId = c.CarId, CarName = c.CarName, BrandName = b.BrandName, ColorName = g.ColorName, ModelYear = c.ModelYear, DailyPrice = c.DailyPrice };
+                return result.ToList(); 
+
+                //CarName, BrandName, ColorName, DailyPrice
+
+            }
+        }
+
+
+
     }
 }
 /*join i in context.CarImages

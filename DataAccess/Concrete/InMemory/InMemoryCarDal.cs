@@ -3,6 +3,7 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -53,6 +54,11 @@ namespace DataAccess.Concrete.InMemory
         public List<Car> GetById(int brandId)
         {
             return _cars.Where(c=>c.BrandId == brandId).ToList();
+        }
+
+        public List<CarDetailDto> GetCarByBrandAndColor(string brandName, string colorName)
+        {
+            throw new NotImplementedException();
         }
 
         public CarDetailDto GetCarDetailId(int id)

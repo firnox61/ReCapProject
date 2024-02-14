@@ -3,6 +3,7 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace Business.Abstract
         IDataResult<List<Car>> GetAllByColorId(int id);
 
         IDataResult<CarDetailDto> GetCarDetailId(int id);
+
+        IDataResult<List<CarDetailDto>> GetCarByBrandAndColor(string brandName, string colorName);
 
 
         IDataResult<List<Car>> GetByDailyPrice(decimal min,  decimal max);
