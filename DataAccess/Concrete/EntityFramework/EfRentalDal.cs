@@ -2,6 +2,7 @@
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,5 +29,19 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.ToList();
             }
         }
+        public bool IsCarAvailableForRental(int carId, DateTime startDate, DateTime? endDate)
+        {
+            using (DataContext context = new DataContext())
+            {
+                // Belirtilen tarih aralığında başka bir kiralama işlemi var mı kontrol et
+                var existingRental = context.Rentals
+                .FirstOrDefault(r => r.CarId == carId &&
+                                     ((startDate >= r.RentDate && startDate <= r.ReturnDate) ||
+                                      (endDate >= r.RentDate && endDate <= r.ReturnDate) || (startDate <= r.ReturnDate && endDate >= r.ReturnDate) ||  (startDate>=endDate)));//|| (startDate<=r.ReturnDate && endDate>=r.ReturnDate)  (startDate<r.RentDate && endDate>=r.ReturnDate)  ||
+
+                return existingRental == null;
+            }
+        }
     }
 }
+//2024-02-15T00:00:00

@@ -6,6 +6,7 @@ using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
@@ -25,55 +26,55 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            var result=_rentalDal.GetAll(r=>r.CarId == rental.CarId
-            && r.RentDate < rental.ReturnDate && r.ReturnDate > rental.RentDate).Any();
-
-            //var result=_rentalDal.GetAll().Where(r => r.CarId == rental.CarId 
-            //&& r.RentDate < rental.ReturnDate && r.ReturnDate > rental.RentDate).ToList();
-            if (result ==true)
+            if (!_rentalDal.IsCarAvailableForRental(rental.CarId, rental.RentDate, rental.ReturnDate))
             {
                 return new ErrorResult(Messages.TarihHata);
             }
-            else
-            {
 
+            else
+            {   
                 _rentalDal.Add(rental);
                 return new SuccessResult(Messages.CarAdded);
+
+
             }
+            //    var result=_rentalDal.GetAll(r=>r.CarId == rental.CarId
+            //    && r.RentDate < rental.ReturnDate && r.ReturnDate > rental.RentDate).Any();
+
+
+            //    if (result ==true)
+            //    {
+            //        return new ErrorResult(Messages.TarihHata);
+            //    }
+            //    else
+            //    {
+
+            //        _rentalDal.Add(rental);
+            //        return new SuccessResult(Messages.CarAdded);
+            //    }
+
+
 
         }
         public IResult RentalDateControl(int carId, DateTime start, DateTime end)
         {
-            var result = _rentalDal.GetAll(r => r.CarId == carId
-           && r.RentDate < start && r.ReturnDate > end).Any();
 
-            //var result=_rentalDal.GetAll().Where(r => r.CarId == rental.CarId 
-            //&& r.RentDate < rental.ReturnDate && r.ReturnDate > rental.RentDate).ToList();
-            if (result == true)
+
+
+
+            if(!_rentalDal.IsCarAvailableForRental( carId,  start,  end))
             {
                 return new ErrorResult(Messages.TarihHata);
             }
+
             else
             {
-
-              
                 return new SuccessResult(Messages.TarihUygun);
+               
+
             }
 
-            /*  var result = _rentalDal.Get(r => r.CarId == carId);
-              if (result != null)
-              {
-                  if((result.RentDate<=end && end<start) || (result.ReturnDate>=start && start>end))
-                  {
-                      return new SuccessDataResult<RentalDetailDto>();
-                  }
-                  else
-                  {
-                      return new ErrorDataResult<RentalDetailDto>(Messages.TarihHata);
-
-                  }
-              }
-              return new SuccessDataResult<RentalDetailDto>();*/
+         
         }
 
         public IResult Delete(int RentalId)
@@ -111,4 +112,5 @@ namespace Business.Concrete
             return new SuccessResult();
         }
     }
+
 }

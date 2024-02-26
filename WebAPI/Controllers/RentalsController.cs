@@ -80,7 +80,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet("rentaldatecontrol")]
+        [HttpPost("rentaldatecontrol")]
         public IActionResult RentalDateControl(int carId, DateTime start, DateTime end)
         {
             var result=_rentalService.RentalDateControl(carId, start, end);
@@ -89,6 +89,7 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
+            //https://localhost:7015/api/rentals/rentaldatecontrol?carId=5&rentDate=2024-02-16T00:00:00&returnDate=2024-02-19T00:00:00
         }
     }
 }
