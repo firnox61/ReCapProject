@@ -89,7 +89,6 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
-            //https://localhost:7015/api/rentals/rentaldatecontrol?carId=5&rentDate=2024-02-16T00:00:00&returnDate=2024-02-19T00:00:00
         }
     }
 }

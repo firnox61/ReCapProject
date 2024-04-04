@@ -17,7 +17,7 @@ namespace Business.Abstract
         IResult Update(Rental rental);
         IResult Delete(int RentalId);
         IDataResult<List<RentalDetailDto>> GetRentalDetailDtos();
-        IResult RentalDateControl(int carId, DateTime start, DateTime end);
+        IDataResult<Rental> RentalDateControl(int carId, DateTime start, DateTime end);
 
     }
-}
+}//https://localhost:7015/api/rentals/rentaldatecontrol?carId=5&rentDate=2024-02-16T00:00:00&returnDate=2024-02-19T00:00:00

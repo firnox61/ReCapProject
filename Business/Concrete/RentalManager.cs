@@ -56,7 +56,7 @@ namespace Business.Concrete
 
 
         }
-        public IResult RentalDateControl(int carId, DateTime start, DateTime end)
+        public IDataResult<Rental> RentalDateControl(int carId, DateTime start, DateTime end)
         {
 
 
@@ -64,12 +64,12 @@ namespace Business.Concrete
 
             if(!_rentalDal.IsCarAvailableForRental( carId,  start,  end))
             {
-                return new ErrorResult(Messages.TarihHata);
+                return new ErrorDataResult<Rental>(Messages.TarihHata);
             }
 
             else
             {
-                return new SuccessResult(Messages.TarihUygun);
+                return new SuccessDataResult<Rental>(Messages.TarihUygun);
                
 
             }

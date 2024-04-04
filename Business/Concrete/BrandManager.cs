@@ -26,9 +26,9 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IResult Delete(string BrandName)
+        public IResult Delete(Brand brand)
         {
-            var result = _brandDal.Get(b => b.BrandName == BrandName);
+            var result = _brandDal.Get(b => b.BrandId == brand.BrandId);
             if (result == null)
             {
                 return new ErrorResult();
@@ -54,10 +54,7 @@ namespace Business.Concrete
 
         public IResult Update(Brand brand)
         {
-            if (brand.BrandName == null)
-            {
-                return new ErrorResult();
-            }
+
             _brandDal.Update(brand);
             return new SuccessResult();
         }

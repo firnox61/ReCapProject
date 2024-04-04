@@ -32,9 +32,9 @@ namespace Business.Concrete
             _carDal = carDal;
         }
         //busines kodu ayrı validasyon(doğrulama) ayrı yazılır
-        [SecuredOperation("car.add,admin")]//düzgün çalışıyo
-        [ValidationAspect(typeof(CarValidator))]//düzgün çalışıyo
-        [CacheRemoveAspect("ICarService.Get")]//oradaki tüm getleri siler
+        //[SecuredOperation("car.add,admin")]//düzgün çalışıyo
+       // [ValidationAspect(typeof(CarValidator))]//düzgün çalışıyo
+       // [CacheRemoveAspect("ICarService.Get")]//oradaki tüm getleri siler
         public IResult Add(Car car)
         {
 

@@ -14,7 +14,7 @@ namespace Business.Constants
         public static string CarListed="Araçlar Listelendi";
         public static string CarFindBrand="Araç markası bulundu";
         public static string CarFind = "Araç bulundu";
-        public static string BuyAccepted="Satış kabul edilid";
+        public static string BuyAccepted="Satış kabul edilidi";
 
         public static string BuyReject = "Arabanın kiralanabilmesi için arabanın teslim edilmesi gerekmektedir.";
         public static string CarDelete="Araba silinmiştir";
@@ -25,5 +25,6 @@ namespace Business.Constants
         public static string AuthorizationDenied = "Yetkiniz Yok";
         public static string TarihHata = "Bu tarihlerde Araç Dolu";
         public static string TarihUygun="Bu tarih aralğı uygun";
+        public static string PaymentDelete="Ödeme Silindi.";
     }
 }
