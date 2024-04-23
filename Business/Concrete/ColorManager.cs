@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -21,13 +23,10 @@ namespace Business.Concrete
         {
             _colorDal = colorDal;
         }
-
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Color color)
         {
-            if (DateTime.Now.Hour == 20)
-            {
-                return new ErrorResult(Messages.CarNameInvalid);
-            }
+
             _colorDal.Add(color);
             return new SuccessResult(Messages.CarAdded);
         }
@@ -45,14 +44,14 @@ namespace Business.Concrete
 
         public IDataResult<List<Color>> GetAll()
         {
-            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.CarListed);
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.ColorListed);
         }
 
         public IDataResult<Color> GetById(int ColorId)
         {
-            return new SuccessDataResult<Color>(_colorDal.Get(g => g.ColorId == ColorId), Messages.CarAdded);
+            return new SuccessDataResult<Color>(_colorDal.Get(g => g.ColorId == ColorId), Messages.ColorByListed);
         }
-
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Update(Color color)
         {
 
@@ -61,7 +60,7 @@ namespace Business.Concrete
                 return new ErrorResult();
             }
             _colorDal.Update(color);
-            return new SuccessResult();
+            return new SuccessResult(Messages.ColorUpdate);
         }
     }
 }

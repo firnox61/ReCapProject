@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -8,6 +11,7 @@ using Entities.DTOs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
@@ -19,40 +23,36 @@ namespace Business.Concrete
 
     {
         IRentalDal _rentalDal;
-        public RentalManager(IRentalDal rentalDal)
+        IFindexService _findexService;
+        public RentalManager(IRentalDal rentalDal, IFindexService findexService)
         {
             _rentalDal = rentalDal;
-        }
+            _findexService = findexService;
 
+        }
+       
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-            if (!_rentalDal.IsCarAvailableForRental(rental.CarId, rental.RentDate, rental.ReturnDate))
+
+
+            IResult result = BusinessRules.Run(CheckRentalFindex(rental));
+            if (result != null)//kurala uymayan bir durum oluşmuşsa
             {
-                return new ErrorResult(Messages.TarihHata);
+                return result;
             }
 
-            else
-            {   
-                _rentalDal.Add(rental);
-                return new SuccessResult(Messages.CarAdded);
+             if (!_rentalDal.IsCarAvailableForRental(rental.CarId, rental.RentDate, rental.ReturnDate))
+             {
+                 return new ErrorResult(Messages.TarihHata);
+             }
 
-
-            }
-            //    var result=_rentalDal.GetAll(r=>r.CarId == rental.CarId
-            //    && r.RentDate < rental.ReturnDate && r.ReturnDate > rental.RentDate).Any();
-
-
-            //    if (result ==true)
-            //    {
-            //        return new ErrorResult(Messages.TarihHata);
-            //    }
-            //    else
-            //    {
-
-            //        _rentalDal.Add(rental);
-            //        return new SuccessResult(Messages.CarAdded);
-            //    }
-
+             else
+             {   
+                 _rentalDal.Add(rental);
+                 return new SuccessResult(Messages.CarAdded);
+             }
+            
 
 
         }
@@ -103,14 +103,26 @@ namespace Business.Concrete
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(), Messages.CarListed);
         }
 
-       
 
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Update(Rental rental)
         {
      
             _rentalDal.Update(rental);
             return new SuccessResult();
         }
+        private IResult CheckRentalFindex(Rental rental)
+        {
+          var result1=_findexService.GetCarMinFindexScore(rental.CarId);
+          var result2=_findexService.GetCustomerFindexScore(rental.CustomerId);
+
+            if(result1.Data<=result2.Data)
+            {
+                return new SuccessResult(Messages.FindexAccepted);
+            }
+            return new ErrorResult(Messages.FindexRejected);
+        }
+      //private IResult CheckCustomerFindex
     }
 
 }

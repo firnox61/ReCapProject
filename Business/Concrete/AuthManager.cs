@@ -38,7 +38,7 @@ namespace Business.Concrete
                 Status = true
             };
             _userService.Add(user);
-            return new SuccessDataResult<User>(user, "Kayıt Oldu");
+            return new SuccessDataResult<User>(user, Messages.UserRegistered);
         }
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto)
@@ -54,7 +54,7 @@ namespace Business.Concrete
                 return new ErrorDataResult<User>(Messages.PasswordError);
             }
 
-            return new SuccessDataResult<User>(userToCheck, "Başarılı Giriş");
+            return new SuccessDataResult<User>(userToCheck, Messages.SuccessfulLog);
         }
 
         public IResult UserExists(string email)

@@ -32,8 +32,8 @@ namespace Business.Concrete
             _carDal = carDal;
         }
         //busines kodu ayrı validasyon(doğrulama) ayrı yazılır
-        //[SecuredOperation("car.add,admin")]//düzgün çalışıyo
-       // [ValidationAspect(typeof(CarValidator))]//düzgün çalışıyo
+        [SecuredOperation("car.add,admin")]//düzgün çalışıyo
+        [ValidationAspect(typeof(CarValidator))]//düzgün çalışıyo
        // [CacheRemoveAspect("ICarService.Get")]//oradaki tüm getleri siler
         public IResult Add(Car car)
         {
@@ -76,7 +76,7 @@ namespace Business.Concrete
         }
         public IDataResult<List<Car>> GetAllByColorId(int id)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id), Messages.CarFindBrand);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id), Messages.CarFindColor);
         }
       
         public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)
@@ -87,7 +87,7 @@ namespace Business.Concrete
         [PerformanceAspect(5)]//çalışma süresi 5 saniyeden fazlaysa haber eder
         public IDataResult<Car> GetById(int CarId)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == CarId), Messages.CarAdded);
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == CarId), Messages.CarByIdShow);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetailDtos()
@@ -97,7 +97,7 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<CarDetailDto>>(Messages.CarNameInvalid);
             }
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarListed);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.CarDetailShow);
         }
         public IDataResult<CarDetailDto> GetCarDetailId(int id)
         {
@@ -106,11 +106,11 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<CarDetailDto>(Messages.CarNameInvalid);
             }
-            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetailId(id), Messages.CarListed);
+            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetailId(id), Messages.CarDetailIdShow);
         }
         public IDataResult<List<CarDetailDto>> GetCarByBrandAndColor(string brandName, string colorName)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarByBrandAndColor(brandName, colorName), Messages.CarListed);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarByBrandAndColor(brandName, colorName), Messages.CarDetailListedBrandAndColor);
         }
 
         [TransactionScopeAspect]
@@ -119,7 +119,7 @@ namespace Business.Concrete
             Add(car);
             if (car.DailyPrice<10)
             {
-                throw new Exception(Messages.CarNameInvalid);
+                throw new Exception(Messages.CarPriceInvalid);
             }
             Add(car);
             return null;

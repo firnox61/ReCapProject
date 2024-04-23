@@ -14,5 +14,6 @@ namespace DataAccess.Abstract
         //List<RentalDetailDto> GetRentalDetails();
         List<RentalDetailDto> GetRentalDetails();
         public bool IsCarAvailableForRental(int carId, DateTime startDate, DateTime? endDate);
+        //public bool IsCarAvailableForRental(int carId, DateTime startDate, DateTime? endDate);
     }
 }

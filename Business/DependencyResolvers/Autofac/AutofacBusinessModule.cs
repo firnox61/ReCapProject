@@ -50,7 +50,7 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<PaymentManager>().As<IPaymentService>();
             builder.RegisterType<EfPaymentDal>().As<IPaymentDal>();
 
-            builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();
+           // builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();
 
 
 

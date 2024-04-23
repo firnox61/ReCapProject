@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Business.Constants;
+using Entities.Concrete;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,15 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(c=>c.DailyPrice).NotEmpty();
             RuleFor(c=>c.DailyPrice).GreaterThan(0);
             RuleFor(c=>c.DailyPrice).GreaterThanOrEqualTo(10).When(c=>c.BrandId==1);
-            RuleFor(c => c.CarName).Must(StartWithA).WithMessage("Ürünler A harfi ile başlamalı");
+            // RuleFor(c => c.CarName).Must(StartWithA).WithMessage("Araçlar A harfi ile başlamalı");
+            
 
 
         }
 
-        private bool StartWithA(string arg)
+      /*  private bool StartWithA(string arg)
         {
             return arg.StartsWith("A");
-        }
+        }*/
     }
 }

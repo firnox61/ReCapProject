@@ -24,12 +24,9 @@ namespace Business.Concrete
 
         public IResult Add(Customer customer)
         {
-            if (DateTime.Now.Hour == 20)
-            {
-                return new ErrorResult(Messages.CarNameInvalid);
-            }
+
             _customerDal.Add(customer);
-            return new SuccessResult(Messages.CarAdded);
+            return new SuccessResult(Messages.CustomerAdded);
         }
 
         public IResult Delete(int CustomerId)
@@ -40,25 +37,25 @@ namespace Business.Concrete
                  return new ErrorResult();
              }
             _customerDal.Delete(result);
-             return new SuccessResult();
+             return new SuccessResult(Messages.CustomerDelete);
            
         }
 
         public IDataResult<List<Customer>> GetAll()
         {
-            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(), Messages.CarListed);
+            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(), Messages.CustomerListed);
         }
 
         public IDataResult<Customer> GetById(int CustomerId)
         {
-            return new SuccessDataResult<Customer>(_customerDal.Get(s => s.UserId == CustomerId), Messages.CarAdded);
+            return new SuccessDataResult<Customer>(_customerDal.Get(s => s.UserId == CustomerId), Messages.CustomerGet);
         }
 
         public IResult Update(Customer customer)
         {
           
             _customerDal.Update(customer);
-            return new SuccessResult();
+            return new SuccessResult(Messages.CustomerUpdate);
         }
     }
 }

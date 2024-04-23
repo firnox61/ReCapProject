@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpDelete("delete")]
+        [HttpPost("delete")]
         public IActionResult Delete(int RentalId)
         {
             var result = _rentalService.Delete(RentalId);
@@ -59,7 +59,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpPut("update")]
+        [HttpPost("update")]
         public IActionResult Update(Rental rental)
         {
             var result = _rentalService.Update(rental);
@@ -90,5 +90,16 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+      /*  [HttpGet("findex")]
+        public IActionResult CheckRentalFindex(int id)
+        {
+            var result = _rentalService.CheckRentalFindex(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }*/
+        
     }
 }
