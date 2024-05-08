@@ -52,5 +52,7 @@ namespace Business.Constants
         public static string CustomerGet = "Müşteri getirildi";
         public static string CustomerUpdate = "Müşteri güncellendi";
         public static object BuyError="Kart bilgilerinde hata var kontrol ediniz";
+        public static string UserInfo="Kullanıcı Bilgiler;";
+        public static string UserUpdate="Kullanıcı bilgileri güncellendi";
     }
 }

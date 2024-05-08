@@ -4,6 +4,7 @@ using Core.Entities.Concrete;
 using Core.Utilities.Result;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;
+using DataAccess.Abstract;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,13 @@ namespace Business.Concrete
     {
         private IUserService _userService;//user vavrmı diye veritabanını kontrol ediyoruz
         private ITokenHelper _tokenHelper;//userı ve tokenını kontrol etneniz gerekiyor
+        IUserDal _userDal;
 
-        public AuthManager(IUserService userService, ITokenHelper tokenHelper)
+        public AuthManager(IUserService userService, ITokenHelper tokenHelper, IUserDal userDal)
         {
             _userService = userService;
             _tokenHelper = tokenHelper;
+            _userDal = userDal;
         }
 
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
@@ -71,6 +74,10 @@ namespace Business.Concrete
             var claims = _userService.GetClaims(user);//rollerini ver
             var accessToken = _tokenHelper.CreateToken(user, claims);
             return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
+        }
+        public IDataResult<User> GetByUserId(int userId)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
         }
     }
 }

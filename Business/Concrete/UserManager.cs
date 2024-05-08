@@ -2,6 +2,7 @@
 using Business.Constants;
 using Core.Entities.Concrete;
 using Core.Utilities.Result;
+using Core.Utilities.Security.Hashing;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.DTOs;
@@ -21,6 +22,22 @@ namespace Business.Concrete
         public UserManager(IUserDal userDal)
         {
             _userDal = userDal;
+        }
+        public IDataResult<UserDetailDto> GetUserByDetail(int id)
+        {
+            var result=_userDal.Get(u=>u.Id == id);
+            if(result == null)
+            {
+                return new ErrorDataResult<UserDetailDto>(Messages.UserNotFound);
+            }
+            var results=_userDal.GetUserByDetails(id);
+            return new SuccessDataResult<UserDetailDto>(results,Messages.UserInfo);
+        }
+        public IDataResult<User> GetByEmailUser(string email)
+        {
+            var result=_userDal.Get(u=>u.Email == email);
+
+            return new SuccessDataResult<User>(result);
         }
 
         public List<OperationClaim> GetClaims(User user)
@@ -64,5 +81,26 @@ namespace Business.Concrete
            _userDal.Delete(user);
             return new SuccessResult();
         }
+
+        public IResult EditProfil(User user, string password)
+        {
+            byte[] passwordHash, passwordSalt;
+            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            var Updateuser = new User
+            {
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Status = user.Status,
+
+            };
+            _userDal.Update(Updateuser);    
+            return new SuccessResult(Messages.UserUpdate);
+        }
+
+      
     }
 }

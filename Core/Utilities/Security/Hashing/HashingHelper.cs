@@ -17,11 +17,11 @@ namespace Core.Utilities.Security.Hashing
             }//verdiğimiz passworda karşılık salt olarak bu metodun keyini ve hash olarak bytesını variyoruz
         }
         public static bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
-        {
+        {//benim verdiğim paswordu hashlayıp saltlayıp veritabanındaki hash ve saltla kıyaslayarak doğrulunu kanıtlayacak
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
             {
-                 //var computedHash = passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+                 
+                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));//i UTF-8 kodlamasına dönüştürerek, password değişkeninin içeriğini bir byte dizisine dönüştürüyor.
                 for (int i = 0; i < computedHash.Length; i++)//hashleri burada karşılaştırıyoruz
                 {
                     if (computedHash[i] != passwordHash[i])

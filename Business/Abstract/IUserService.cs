@@ -15,11 +15,13 @@ namespace Business.Abstract
         List<OperationClaim> GetClaims(User user);
         void Add(User user);
         User GetByMail(string email);
+        IDataResult<User> GetByEmailUser(string email);
         IDataResult<List<UserDetailDto>> GetUserDetailDtos();
+        IDataResult<UserDetailDto> GetUserByDetail(int id);
         IDataResult<User> GetByUserId(int userId);
         IDataResult<List<User>> GetAll();
         IResult Update(User user);
         IResult Delete(User user);
-
+        IResult EditProfil(User user, string password);
     }
 }

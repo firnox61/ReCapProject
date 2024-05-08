@@ -17,7 +17,16 @@ namespace WebAPI.Controllers
             _authService = authService;
             _userService = userService;
         }
-
+        [HttpGet("getbyid")]
+        public IActionResult GetByUserId(int userId)
+        {
+            var result = _userService.GetByUserId(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
         [HttpPost("login")]
         public ActionResult Login(UserForLoginDto userForLoginDto)
         {

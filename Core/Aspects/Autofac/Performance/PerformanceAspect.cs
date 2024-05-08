@@ -23,7 +23,7 @@ namespace Core.Aspects.Autofac.Performance
         }
 
 
-        protected override void OnBefore(IInvocation invocation)//zamanı başlat
+        protected override void OnBefore(IInvocation invocation)//zamanı başlat0
         {
             _stopwatch.Start();
         }

@@ -26,6 +26,24 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
+        public UserDetailDto GetUserByDetails(int id)
+        {
+            using (DataContext context = new DataContext())
+            {
+                var result = (from c in context.Customers
+                             join u in context.Users
+                             on c.UserId equals u.Id
+                             select new UserDetailDto
+                             {
+                                 Id = u.Id,
+                                 FirstName = u.FirstName,
+                                 LastName = u.LastName,
+                                 Email = u.Email,
+                                 CompanyName = c.CompanyName
+                             }).FirstOrDefault(); 
+                return result;
+            }
+        }
         public List<UserDetailDto> GetUserDetails()
         {
             using (DataContext context = new DataContext())

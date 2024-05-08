@@ -16,6 +16,7 @@ namespace Business.Abstract
         IDataResult<User> Login(UserForLoginDto userForLoginDto);
         IResult UserExists(string email);//kullanıcı varmı ve maille yapıcaz
         IDataResult<AccessToken> CreateAccessToken(User user);//acces token üretmek  istiyoruz
+        IDataResult<User> GetByUserId(int userId);
     }
 }
 
