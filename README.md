@@ -21,7 +21,7 @@ Proje SOLID, Kurumsal Yazılım Mimari, AOP ve Yazılım Geliştirme Prensipleri
 
 - Cross Cutting Concerns "kesişen ilgililer" *interceptor Autofac kütüphanesi kullanılarak geliştirildi.
 
--- Performance
+--Performance
 -- Transaction
 -- Validation
 -- Caching
