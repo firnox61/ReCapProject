@@ -14,9 +14,32 @@ RentACar is a car rental solution. This project includes an enterprise-grade sol
 - SOLID Principles,
 - Clean Coding,
 - DRY (Don't Repeat Yourself)
-## Başlangıç
+## Türkçe Açıklama
 
-Bu projeyi yerel makinenizde çalıştırmak için talimatlar.
+Proje SOLID, Kurumsal Yazılım Mimari, AOP ve Yazılım Geliştirme Prensiplerine uygun geliştirildi.
+- .Net Core 7.0 platformu ile geliştirildi.
+
+- Cross Cutting Concerns "kesişen ilgililer" *interceptor Autofac kütüphanesi kullanılarak geliştirildi.
+
+-- Performance
+-- Transaction
+-- Validation
+-- Caching
+-Entity Framework ORM kullanılarak geliştirildi.
+
+-AOP ile Cross Cutting Concerns "kesişen ilgililer" projede modülarite yapıda geliştirildi.
+
+-Exception Middleware ile Merkezi hata mekanizması geliştrildi.
+
+-Claim Mekanizması ile rol bazlı yetkilendirmenin sınırları esnetildi.
+
+-JWT (JSON Web Token) kimlik doğrulaması entegre edildi.
+
+-Fluent Validation ile validasyon(doğrulama) işlemleri geliştirildi.
+
+-IoC(Inversion Of Control) ile (loose coupling) olan nesneler oluşturuldu.
+
+-REST VE RESTFUL WEB SERVİS ile sunucu-istemci iletişimi sağlandı.
 
 ### Gereksinimler
 
