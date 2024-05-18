@@ -25,31 +25,20 @@ Proje SOLID, Kurumsal Yazılım Mimari, AOP ve Yazılım Geliştirme Prensipleri
 -- Transaction
 -- Validation
 -- Caching
--Entity Framework ORM kullanılarak geliştirildi.
+- Entity Framework ORM kullanılarak geliştirildi.
 
--AOP ile Cross Cutting Concerns "kesişen ilgililer" projede modülarite yapıda geliştirildi.
+- AOP ile Cross Cutting Concerns "kesişen ilgililer" projede modülarite yapıda geliştirildi.
 
--Exception Middleware ile Merkezi hata mekanizması geliştrildi.
+- Exception Middleware ile Merkezi hata mekanizması geliştrildi.
 
--Claim Mekanizması ile rol bazlı yetkilendirmenin sınırları esnetildi.
+- Claim Mekanizması ile rol bazlı yetkilendirmenin sınırları esnetildi.
 
--JWT (JSON Web Token) kimlik doğrulaması entegre edildi.
+- JWT (JSON Web Token) kimlik doğrulaması entegre edildi.
 
--Fluent Validation ile validasyon(doğrulama) işlemleri geliştirildi.
+- Fluent Validation ile validasyon(doğrulama) işlemleri geliştirildi.
 
--IoC(Inversion Of Control) ile (loose coupling) olan nesneler oluşturuldu.
+- IoC(Inversion Of Control) ile (loose coupling) olan nesneler oluşturuldu.
 
--REST VE RESTFUL WEB SERVİS ile sunucu-istemci iletişimi sağlandı.
+- REST VE RESTFUL WEB SERVİS ile sunucu-istemci iletişimi sağlandı.
 
-### Gereksinimler
 
-- Gereksinim 1
-- Gereksinim 2
-
-### Kurulum
-
-Kurulum adımları:
-
-```bash
-komut 1
-komut 2
