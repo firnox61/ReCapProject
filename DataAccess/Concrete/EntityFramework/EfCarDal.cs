@@ -71,9 +71,16 @@ namespace DataAccess.Concrete.EntityFramework
                               on c.BrandId equals b.BrandId
                               join g in context.Color
                               on c.ColorId equals g.ColorId
-                              where b.BrandName == brandName && g.ColorName == colorName
+                             join i in context.CarImages
+                           on c.CarId equals i.CarId into images
+                             from img in images.DefaultIfEmpty()
+                             where b.BrandName == brandName && g.ColorName == colorName
                              select new CarDetailDto
-                              { CarId = c.CarId, CarName = c.CarName, BrandName = b.BrandName, ColorName = g.ColorName, ModelYear = c.ModelYear, DailyPrice = c.DailyPrice };
+                              { CarId = c.CarId, CarName = c.CarName, BrandName = b.BrandName, ColorName = g.ColorName
+                              , ModelYear = c.ModelYear, DailyPrice = c.DailyPrice
+                             ,ImagePath = (img != null) ? img.ImagePath : null,
+                                 MinFindexPoint = c.MinFindexPoint
+                             };
                 return result.ToList(); 
 
                 //CarName, BrandName, ColorName, DailyPrice

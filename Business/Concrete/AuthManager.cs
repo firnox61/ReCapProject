@@ -79,5 +79,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
         }
+
+
     }
 }

@@ -22,7 +22,7 @@ namespace Business.Concrete
             _paymentDal = payment;
         }
         [ValidationAspect(typeof(PaymentValidator))]
-        [CacheRemoveAspect("IPaymentService.GetAll()")]
+       // [CacheRemoveAspect("IPaymentService.GetAll()")]
         public IResult Add(Payment payment)
         {
             _paymentDal.Add(payment);

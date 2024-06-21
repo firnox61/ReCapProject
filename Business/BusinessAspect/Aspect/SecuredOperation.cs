@@ -20,6 +20,7 @@ namespace Business.BusinessAspect.Aspect
 
         public SecuredOperation(string roles)
         {
+            _roles = roles.Split(',');//productmanagerdeki şeki 2 ye bölüp arrayliyo
             _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();//bizim injection altyapımızı okumamızı sağlayacak
 
         }

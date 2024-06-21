@@ -14,6 +14,7 @@ namespace Business.Abstract
     {
         IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password);//veritabanından kontrol edilmeis demek
         IDataResult<User> Login(UserForLoginDto userForLoginDto);
+       // IDataResult<UserForLoginDto> CheckPassword(int id,string password);
         IResult UserExists(string email);//kullanıcı varmı ve maille yapıcaz
         IDataResult<AccessToken> CreateAccessToken(User user);//acces token üretmek  istiyoruz
         IDataResult<User> GetByUserId(int userId);
