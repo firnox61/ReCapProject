@@ -16,5 +16,6 @@ namespace Entities.Concrete
         public string CVV { get; set; }
         public int ExpiryMonth { get; set; }
         public int ExpiryYear { get; set; }
+        public bool SaveCard { get;set; }   
     }
 }

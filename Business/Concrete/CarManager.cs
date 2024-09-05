@@ -34,7 +34,7 @@ namespace Business.Concrete
         // [CacheRemoveAspect("ICarService.Get")]//oradaki tüm getleri siler
         //busines kodu ayrı validasyon(doğrulama) ayrı yazılır
         // [SecuredOperation("car.add,admin")]//düzgün çalışıyo
-       // [SecuredOperation("admin")]
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(CarValidator))]//düzgün çalışıyo
         public IResult Add(Car car)
         {
