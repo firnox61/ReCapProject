@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Business.Abstract
 {
     public interface IAuthService
-    {
+    {//sadsada
         IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password);//veritabanından kontrol edilmeis demek
         IDataResult<User> Login(UserForLoginDto userForLoginDto);
        // IDataResult<UserForLoginDto> CheckPassword(int id,string password);
