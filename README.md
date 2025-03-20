@@ -40,5 +40,5 @@ Proje SOLID, Kurumsal Yazılım Mimari, AOP ve Yazılım Geliştirme Prensipleri
 - IoC(Inversion Of Control) ile (loose coupling) olan nesneler oluşturuldu.
 
 - REST VE RESTFUL WEB SERVİS ile sunucu-istemci iletişimi sağlandı.
-
-
+# Frontend tarafı Angular geliştirme yapıldı link
+- https://github.com/firnox61/rentacar-frontend-new
